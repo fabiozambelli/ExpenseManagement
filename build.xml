@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="ExpenseManagement" default="init">
+	
+	<property name="maven.location" value="/Users/fabiozambelli/Sviluppo/Tools/apache-maven-2.0.10/bin" />
+	<property name="expensemanagement.location" value="/Users/fabiozambelli/Sviluppo/MvnProjects/ExpenseManagement" />
+	<property name="expensemanagement_model_jar.location" value="/Users/fabiozambelli/Sviluppo/MvnProjects/ExpenseManagement/expensemanagement-model-jar" />
+	<property name="expensemanagement_webservice_war.location" value="/Users/fabiozambelli/Sviluppo/MvnProjects/ExpenseManagement/expensemanagement-webservice-war" />
+	<property name="environment" value="" />
+	
+	<target name="clean-expensemanagement">
+		<property name="maven" location="${maven.location}/mvn"/>
+		<exec dir="${expensemanagement.location}" executable="${maven}">
+		        <arg value="clean"/>        
+		</exec>
+	</target>
+	
+	<target name="clean-expensemanagement_model_jar">
+			<property name="maven" location="${maven.location}/mvn"/>
+			<exec dir="${expensemanagement_model_jar.location}" executable="${maven}">
+			        <arg value="clean"/>        
+			</exec>
+	</target>
+	
+	<target name="clean-expensemanagement_webservice_war">
+			<property name="maven" location="${maven.location}/mvn"/>
+			<exec dir="${expensemanagement_webservice_war.location}" executable="${maven}">
+			        <arg value="clean"/>        
+			</exec>
+	</target>		
+	
+	<!-- environment test -->
+		
+	<target name="package-test-expensemanagement_model_jar" depends="clean-expensemanagement_model_jar">				
+		<property name="maven" location="${maven.location}/mvn"/>
+		<exec dir="${expensemanagement_model_jar.location}" executable="${maven}">
+			<arg value="package"/>    
+			<arg value="-Penv-test"/>
+		</exec>
+	</target>
+		
+	<target name="install-test-expensemanagement_model_jar" depends="package-test-expensemanagement_model_jar">					
+		<property name="maven" location="${maven.location}/mvn"/>
+		<exec dir="${expensemanagement_model_jar.location}" executable="${maven}">
+			<arg value="install"/>    
+		</exec>
+	</target>
+				
+	<target name="package-test-expensemanagement_webservice_war" depends="clean-expensemanagement_webservice_war, install-test-expensemanagement_model_jar">					
+		<property name="maven" location="${maven.location}/mvn"/>
+		<exec dir="${expensemanagement_webservice_war.location}" executable="${maven}">
+			<arg value="package"/>    
+			<arg value="-Penv-test"/>
+		</exec>
+	</target>
+		
+	<!-- environment -->
+			
+	
+	<!--  command -->
+	
+	<target name="rilascio-webapp-test" depends="package-test-expensemanagement_webservice_war"/>
+	
+	<target name="init"/>
+	
+</project>
