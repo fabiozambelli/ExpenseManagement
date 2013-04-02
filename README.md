@@ -6,7 +6,7 @@ ImageMagic installation on server side is required for image manipulation.
 
 Tesseract installation on server side is required for optical character recognition.
 
-ExpenseManagement provides RESTFull web services for image uploading and retreiving JSON feed.
+ExpenseManagement provides RESTFull web services for image uploading and retrieving JSON data.
 
 License
 =======
