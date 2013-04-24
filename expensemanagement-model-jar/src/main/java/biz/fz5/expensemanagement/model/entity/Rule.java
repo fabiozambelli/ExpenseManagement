@@ -3,12 +3,17 @@
 */
 package biz.fz5.expensemanagement.model.entity;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author fabiozambelli
  *
  */
 public class Rule {
 
+	protected static Logger log = Logger.getLogger(Rule.class
+			.getName());
+	
 	private String entity;
 	private String regex;
 	private short level;
@@ -41,8 +46,8 @@ public class Rule {
 	}
 
 	public void print(){
-		System.out.println("regex:"+regex);
-		System.out.println("level:"+level);
-		System.out.println("matcherGroup:"+matcherGroup);
+		log.debug("regex:"+regex);
+		log.debug("level:"+level);
+		log.debug("matcherGroup:"+matcherGroup);
 	}
 }

@@ -6,6 +6,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -18,9 +19,12 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class SchedulerComponent {
 
+	protected static Logger log = Logger.getLogger(SchedulerComponent.class
+			.getName());
+	
 	public SchedulerComponent(){
 		
-		System.out.println("SchedulerComponent started");
+		log.info("SchedulerComponent started");
 		
 		try {
 			
@@ -37,13 +41,13 @@ public class SchedulerComponent {
 	                .build();
 	        
 	        Date ft = sched.scheduleJob(job, trigger);
-	        System.out.println(job.getKey() + " has been scheduled to run at: " + ft
+	        log.info(job.getKey() + " has been scheduled to run at: " + ft
 	                + " and repeat based on expression: "
 	                + trigger.getCronExpression());
 	        
 	        sched.start();
 	        
-	        System.out.println("Scheduler started");
+	        log.info("Scheduler started");
 	        
 		} catch (Exception e) {
 			

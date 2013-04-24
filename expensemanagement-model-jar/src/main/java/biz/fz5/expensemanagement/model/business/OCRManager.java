@@ -5,6 +5,8 @@ package biz.fz5.expensemanagement.model.business;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 import biz.fz5.expensemanagement.model.command.CommandController;
 import biz.fz5.expensemanagement.model.command.ConvertContrast0Level60Command;
 import biz.fz5.expensemanagement.model.command.ConvertContrast2Level60Command;
@@ -28,6 +30,9 @@ import biz.fz5.expensemanagement.model.entity.Receipt;
  */
 public class OCRManager {
 
+	protected static Logger log = Logger.getLogger(OCRManager.class
+			.getName());
+	
 	private CommandController commandController = new CommandController();
 	
 	private ImageFile imageFile;
@@ -55,83 +60,67 @@ public class OCRManager {
 			e.printStackTrace();
 		}
 		
-		
-		/*
-		File dir = new File(CommandConfig.DIR_PUB);
-		
-		if (dir.exists() && dir.isDirectory()) {
-		
-			File[] files = dir.listFiles(new FilenameFilter() { 
-		         public boolean accept(File dir, String filename)
-		              { return filename.endsWith(".jpg"); }
-			} );
-			
-			if ((files!=null) && (files.length>0))
-				f = files[0];
-		}
-		*/
-		
 		return f;
 	}
 	
 	private void performTesseractPsm1Command() throws Exception {
-		System.out.println("performTesseractPsm1Command");
+		log.debug("performTesseractPsm1Command");
 		TesseractPsm1Command cTesseractPsm1 = new TesseractPsm1Command(imageFile);
 		commandController.addCommand(TesseractPsm1Command.ID, cTesseractPsm1);
 		commandController.executeCommand(TesseractPsm1Command.ID);	
 	}
 	
 	private void performTesseractPsm6Command() throws Exception {
-		System.out.println("performTesseractPsm6Command");
+		log.debug("performTesseractPsm6Command");
 		TesseractPsm6Command cTesseractPsm6 = new TesseractPsm6Command(imageFile);
 		commandController.addCommand(TesseractPsm6Command.ID, cTesseractPsm6);
 		commandController.executeCommand(TesseractPsm6Command.ID);
 	}
 	
 	private void performExtractInformationCommand() throws Exception {
-		System.out.println("performExtractInformationCommand");		
+		log.debug("performExtractInformationCommand");		
 		ExtractInformationCommand cExtractInformation = new ExtractInformationCommand(imageFile, receipt);
 		commandController.addCommand(ExtractInformationCommand.ID, cExtractInformation);
 		commandController.executeCommand(ExtractInformationCommand.ID);		
 	}	
 	
 	private void performConvertContrast2Level60Command() throws Exception {
-		System.out.println("performConvertContrast2Level60Command");
+		log.debug("performConvertContrast2Level60Command");
 		ConvertContrast2Level60Command cContrast2Level60 = new ConvertContrast2Level60Command(imageFile);
 		commandController.addCommand(ConvertContrast2Level60Command.ID, cContrast2Level60);
 		commandController.executeCommand(ConvertContrast2Level60Command.ID);
 	}
 	
 	private void performConvertContrast2Level70Command() throws Exception {
-		System.out.println("performConvertContrast2Level70Command");
+		log.debug("performConvertContrast2Level70Command");
 		ConvertContrast2Level70Command cContrast2Level70 = new ConvertContrast2Level70Command(imageFile);
 		commandController.addCommand(ConvertContrast2Level70Command.ID, cContrast2Level70);
 		commandController.executeCommand(ConvertContrast2Level70Command.ID);
 	}
 	
 	private void performConvertContrast0Level60Command() throws Exception {
-		System.out.println("performConvertContrast0Level60Command");
+		log.debug("performConvertContrast0Level60Command");
 		ConvertContrast0Level60Command cContrast0Level60 = new ConvertContrast0Level60Command(imageFile);
 		commandController.addCommand(ConvertContrast0Level60Command.ID, cContrast0Level60);
 		commandController.executeCommand(ConvertContrast0Level60Command.ID);
 	}
 	
 	private void performConvertContrast4Level60Command() throws Exception {
-		System.out.println("performConvertContrast4Level60Command");
+		log.debug("performConvertContrast4Level60Command");
 		ConvertContrast4Level60Command cContrast4Level60 = new ConvertContrast4Level60Command(imageFile);
 		commandController.addCommand(ConvertContrast4Level60Command.ID, cContrast4Level60);
 		commandController.executeCommand(ConvertContrast4Level60Command.ID);
 	}
 	
 	private void performConvertContrast4Level70Command() throws Exception {
-		System.out.println("performConvertContrast4Level70Command");
+		log.debug("performConvertContrast4Level70Command");
 		ConvertContrast4Level70Command cContrast4Level70 = new ConvertContrast4Level70Command(imageFile);
 		commandController.addCommand(ConvertContrast4Level70Command.ID, cContrast4Level70);
 		commandController.executeCommand(ConvertContrast4Level70Command.ID);
 	}
 	
 	private void performConvertContrast6Level70Command() throws Exception {
-		System.out.println("performConvertContrast6Level70Command");
+		log.debug("performConvertContrast6Level70Command");
 		ConvertContrast6Level70Command cContrast6Level70 = new ConvertContrast6Level70Command(imageFile);
 		commandController.addCommand(ConvertContrast6Level70Command.ID, cContrast6Level70);
 		commandController.executeCommand(ConvertContrast6Level70Command.ID);
@@ -148,7 +137,7 @@ public class OCRManager {
 	}
 	
 	private void performCompleteJob() throws Exception {
-		System.out.println("performCompleteJob");
+		log.debug("performCompleteJob");
 		
 		// (6) sposta output in processed
 		MoveFileToOutCommand cMoveToOut = new MoveFileToOutCommand(imageFile);
@@ -174,20 +163,20 @@ public class OCRManager {
 				throw new Exception("Nothing to do");
 			
 			String fileName = f.getName().substring(0,getFile().getName().lastIndexOf("."));
-			System.out.println("get :" + fileName);
+			log.debug("get :" + fileName);
 			imageFile = new ImageFile(fileName);
 			
 			// (1) il file viene copiato nella directory 'tmp'
 			CopyFileToTmpCommand cCopyToTmp = new CopyFileToTmpCommand(imageFile);
 			commandController.addCommand(CopyFileToTmpCommand.ID, cCopyToTmp);
 			commandController.executeCommand(CopyFileToTmpCommand.ID);					
-			System.out.println("(1) CopyFileToTmpCommand done");
+			log.debug("(1) CopyFileToTmpCommand done");
 			
 			// (2) converti in tif
 			ConvertTifCommand cTif = new ConvertTifCommand(imageFile);
 			commandController.addCommand(ConvertTifCommand.ID, cTif);
 			commandController.executeCommand(ConvertTifCommand.ID);
-			System.out.println("(2) ConvertTifCommand done");
+			log.debug("(2) ConvertTifCommand done");
 			
 			receipt = new Receipt(); 
 			

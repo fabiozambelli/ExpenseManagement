@@ -6,6 +6,7 @@ package biz.fz5.expensemanagement.model.business;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,12 +20,15 @@ import biz.fz5.expensemanagement.model.hibernate.pojo.Receipt;
  */
 public class ReceiptConsumerJob implements Job {
 
+	protected static Logger log = Logger.getLogger(ReceiptConsumerJob.class
+			.getName());
+	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 
 		try {
 		
 			JobKey jobKey = context.getJobDetail().getKey();
-	        System.out.println("ReceiptConsumerJob says: " + jobKey + " executing at " + new Date());
+	        log.debug("ReceiptConsumerJob says: " + jobKey + " executing at " + new Date());
 	        
 	        ReceiptInterface receiptManager = new ReceiptManager();
 	        List<Receipt> receiptPojoList =  receiptManager.getReceipts();

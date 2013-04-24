@@ -3,16 +3,16 @@
 */
 package biz.fz5.expensemanagement.model.business;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.regex.PatternSyntaxException;
-
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
-import java.util.List;
+import org.apache.log4j.Logger;
 
 import biz.fz5.expensemanagement.model.entity.CandidateElement;
 import biz.fz5.expensemanagement.model.entity.Receipt;
@@ -23,6 +23,9 @@ import biz.fz5.expensemanagement.model.entity.Rule;
  *
  */
 public class ReceiptParserComponent {
+	
+	protected static Logger log = Logger.getLogger(ReceiptConsumerJob.class
+			.getName());
 	
 	private RuleFactory ruleFactory;
 	private List<Rule> rules;
@@ -56,7 +59,7 @@ public class ReceiptParserComponent {
 				totalFound = false;
 				dateFound = false;
 				
-				System.out.println("<line>" + line + "</line>");
+				log.debug("<line>" + line + "</line>");
 								
 				rules = ruleFactory.getRules("Total", 1);
 				if (!totalFinder(rules, line, receipt)) {
@@ -115,7 +118,7 @@ public class ReceiptParserComponent {
 					
 					if (matcher.find()) {
 						
-						System.out.println(r.getEntity() + ": FOUND(L"+r.getLevel()+") " + r.getRegex() + " in " + line);
+						log.info(r.getEntity() + ": FOUND(L"+r.getLevel()+") " + r.getRegex() + " in " + line);
 						
 						switch (r.getMatcherGroup()) {
 						
@@ -175,7 +178,7 @@ public class ReceiptParserComponent {
 					
 					if (matcher.find()) {
 						
-						System.out.println(r.getEntity() + ": FOUND(L"+r.getLevel()+") " + r.getRegex() + " in " + line);
+						log.info(r.getEntity() + ": FOUND(L"+r.getLevel()+") " + r.getRegex() + " in " + line);
 						
 						switch (r.getMatcherGroup()) {
 						

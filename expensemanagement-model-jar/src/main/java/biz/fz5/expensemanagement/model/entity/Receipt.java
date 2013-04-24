@@ -10,7 +10,10 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author fabiozambelli
@@ -19,6 +22,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Receipt {
+	
+	protected static Logger log = Logger.getLogger(Receipt.class
+			.getName());
 	
 	private String name;
 	private String total;
@@ -69,16 +75,16 @@ public class Receipt {
 	}
 	
 	public void print() {
-		System.out.println("+++++++++++++++++++++++ " + name);
-		System.out.println("totalCandidate:");
+		log.info("+++++++++++++++++++++++ " + name);
+		log.info("totalCandidate:");
 		for (CandidateElement candidateElement : totalCandidate)
-			System.out.println(candidateElement.getValue() + "-" + candidateElement.getWeight());
-		System.out.println("dateCandidate:");
+			log.info(candidateElement.getValue() + "-" + candidateElement.getWeight());
+		log.info("dateCandidate:");
 		for (CandidateElement candidateElement : dateCandidate)
-			System.out.println(candidateElement.getValue() + "-" + candidateElement.getWeight());
-		System.out.println("total:"+total);
-		System.out.println("date:"+date);
-		System.out.println("++++++++++++++++++++++++++++++++ ");		
+			log.info(candidateElement.getValue() + "-" + candidateElement.getWeight());
+		log.info("total:"+total);
+		log.info("date:"+date);
+		log.info("++++++++++++++++++++++++++++++++ ");		
 	}
 	
 	private String getHighestOccurency(Hashtable<?, Integer> t){
@@ -357,6 +363,6 @@ public class Receipt {
 		occurency.put("2.3", 3);
 		occurency.put("4.5", 2);
 		String max = r.getHighestValue(occurency);
-		System.out.println(max);
+		log.info(max);
 	}
 }

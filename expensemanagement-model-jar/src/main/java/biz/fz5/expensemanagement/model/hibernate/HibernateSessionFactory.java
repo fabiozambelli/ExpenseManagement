@@ -18,6 +18,9 @@ import biz.fz5.expensemanagement.model.Constants;
  */
 public class HibernateSessionFactory {
 
+	protected static Logger log = Logger.getLogger(HibernateSessionFactory.class
+			.getName());
+	
 	private static Configuration configuration;
 
 	private static SessionFactory sessionFactory;
@@ -28,9 +31,6 @@ public class HibernateSessionFactory {
 
 	private static final ThreadLocal threadInterceptor = new ThreadLocal();
 
-	protected static final Logger log = Logger
-			.getLogger(HibernateSessionFactory.class.getName());
-
 	private static String CONFIG_FILE_LOCATION = Constants
 			.getValue("configLocation");
 
@@ -38,13 +38,11 @@ public class HibernateSessionFactory {
 	static {
 		try {
 			log.debug("CONFIG_FILE_LOCATION:" + CONFIG_FILE_LOCATION);
-			System.out.println("CONFIG_FILE_LOCATION:" + CONFIG_FILE_LOCATION);
 			configuration = new Configuration();
 			configuration.configure(CONFIG_FILE_LOCATION);
 			sessionFactory = configuration.buildSessionFactory();
 			log.debug("sessionFactory:" + sessionFactory);
-			System.out.println("sessionFactory:" + sessionFactory);
-
+			
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 			log.error("Building SessionFactory failed.", ex);

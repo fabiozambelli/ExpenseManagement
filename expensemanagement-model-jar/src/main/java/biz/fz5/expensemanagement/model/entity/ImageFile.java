@@ -6,12 +6,17 @@ package biz.fz5.expensemanagement.model.entity;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author fabiozambelli
  *
  */
 public class ImageFile {
 
+	protected static Logger log = Logger.getLogger(ImageFile.class
+			.getName());
+	
 	private String fileName;
 	
 	public ImageFile(String fileName) {
@@ -21,12 +26,12 @@ public class ImageFile {
 	
 	public void doAction(String commandString) throws Exception {
 		
-			System.out.println("> " + commandString);
+			log.debug("> " + commandString);
 			Process p = Runtime.getRuntime().exec(commandString);	
 			String line;
 			BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		    while ((line = in.readLine()) != null) {
-		         System.out.println("> " + line);
+		    	log.debug("> " + line);
 		    }
 		    in.close();			
 	}
