@@ -8,7 +8,12 @@
   <filter-mapping>
     	<filter-name>HibernateFilter</filter-name>
     	<url-pattern>/rest/*</url-pattern>
-  </filter-mapping>	
+  </filter-mapping>
+  <listener>
+    <listener-class>
+      biz.fz5.expensemanagement.service.ApiKeyInitializer
+    </listener-class>
+  </listener>	
   <listener>
     <listener-class>
       org.springframework.web.context.ContextLoaderListener
@@ -26,5 +31,49 @@
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GCMRegister</servlet-name>
+    <servlet-class>
+      biz.fz5.expensemanagement.service.GCMRegister
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCMRegister</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GCMUnregister</servlet-name>
+    <servlet-class>
+      biz.fz5.expensemanagement.service.GCMUnregister
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCMUnregister</servlet-name>
+    <url-pattern>/unregister</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GCMHome</servlet-name>
+    <servlet-class>
+      biz.fz5.expensemanagement.service.GCMHome
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCMHome</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GCMSendMessages</servlet-name>
+    <servlet-class>
+      biz.fz5.expensemanagement.service.GCMSendMessages
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCMSendMessages</servlet-name>
+    <url-pattern>/sendAll</url-pattern>
   </servlet-mapping>
 </web-app>

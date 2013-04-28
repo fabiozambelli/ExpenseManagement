@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="biz.fz5.expensemanagement.model.hibernate.pojo.UserDevice" table="dispositivi">
+        <id name="id" type="java.lang.Long">
+            <column name="id_dispositivo"/>
+            <generator class="identity" />
+        </id>
+        <property name="idUser" type="java.lang.String" lazy="true">
+            <column name="id_utente" length="128" />
+        </property>
+        <property name="idRegistration" type="java.lang.String" lazy="true">
+            <column name="id_registrazione" length="255" />
+        </property>        
+    </class>
+</hibernate-mapping>

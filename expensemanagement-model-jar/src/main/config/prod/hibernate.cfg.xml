@@ -34,7 +34,8 @@
 	
 	<mapping resource="biz/fz5/expensemanagement/model/hibernate/mapping/Receipt.hbm.xml" />
 	<mapping resource="biz/fz5/expensemanagement/model/hibernate/mapping/ReceiptStatus.hbm.xml" />
-		 
+	<mapping resource="biz/fz5/expensemanagement/model/hibernate/mapping/UserDevice.hbm.xml" />	 
+	
 </session-factory>
 
 </hibernate-configuration>

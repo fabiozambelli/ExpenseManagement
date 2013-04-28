@@ -33,7 +33,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.properties</include>
-					<include>**/*.xml</include>
+					<include>**/*.key</include>
 				</includes>
 			</resource>
 		</resources>
@@ -71,8 +71,8 @@
 									<tasks>
 										<delete file="src/main/resources/log4j.properties" />
 										<copy file="src/main/config/test/log4j.properties" tofile="src/main/resources/log4j.properties" />
-										<!-- delete file="src/main/resources/application.properties" />
-										<copy file="src/main/config/test/application.properties" tofile="src/main/resources/application.properties" /-->
+										<delete file="src/main/resources/api.key" />
+										<copy file="src/main/config/test/api.key" tofile="src/main/resources/api.key" />
 									</tasks>
 								</configuration>
 							</execution>
@@ -97,8 +97,8 @@
 									<tasks>
 										<delete file="src/main/resources/log4j.properties" />
 										<copy file="src/main/config/prod/log4j.properties" tofile="src/main/resources/log4j.properties" />
-										<!--delete file="src/main/resources/application.properties" />
-										<copy file="src/main/config/prod/application.properties" tofile="src/main/resources/application.properties" /-->
+										<delete file="src/main/resources/api.key" />
+										<copy file="src/main/config/prod/api.key" tofile="src/main/resources/api.key" />
 									</tasks>
 								</configuration>
 							</execution>
@@ -146,5 +146,10 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
 		</dependency>		
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 </project>

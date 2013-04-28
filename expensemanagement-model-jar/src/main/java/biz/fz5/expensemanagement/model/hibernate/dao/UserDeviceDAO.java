@@ -3,9 +3,6 @@
 */
 package biz.fz5.expensemanagement.model.hibernate.dao;
 
-import biz.fz5.expensemanagement.model.hibernate.BaseHibernateDAO;
-import biz.fz5.expensemanagement.model.hibernate.pojo.Receipt;
-
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +12,20 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import biz.fz5.expensemanagement.model.hibernate.BaseHibernateDAO;
+import biz.fz5.expensemanagement.model.hibernate.pojo.UserDevice;
+
 /**
  * @author fabiozambelli
  *
  */
-public class ReceiptDAO extends BaseHibernateDAO {
+public class UserDeviceDAO extends BaseHibernateDAO {
 
-	private static final Log log = LogFactory.getLog(ReceiptDAO.class);
+	private static final Log log = LogFactory.getLog(UserDeviceDAO.class);
 
-	public void save(Receipt transientInstance) {
+	public void save(UserDevice transientInstance) {
 
-		log.debug("saving Receipt instance");
+		log.debug("saving UserDevice instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
@@ -36,9 +36,9 @@ public class ReceiptDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Receipt instance) {
+	public void attachDirty(UserDevice instance) {
 
-		log.debug("attaching dirty Receipt instance");
+		log.debug("attaching dirty UserDevice instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -48,8 +48,8 @@ public class ReceiptDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Receipt persistentInstance) {
-		log.debug("deleting Receipt instance");
+	public void delete(UserDevice persistentInstance) {
+		log.debug("deleting UserDevice instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -59,29 +59,29 @@ public class ReceiptDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Receipt findItem(Long id) throws Exception {
+	public UserDevice findItem(Long id) throws Exception {
 
-		Receipt receipt = null;
+		UserDevice userDevice = null;
 		try {
 			Criteria crit = null;
-			crit = getSession().createCriteria(Receipt.class);
+			crit = getSession().createCriteria(UserDevice.class);
 			crit.add(Restrictions.eq("id", id));
-			receipt = (Receipt) crit.uniqueResult();
+			userDevice = (UserDevice) crit.uniqueResult();
 		} catch (Exception e) {
 			log.error("findItem failed", e);
 			throw new Exception(e);
 		}
-		return receipt;
+		return userDevice;
 	}
 		
-	public List<Receipt> findItems(Map parameters, String orderBy, boolean orderAsc)
+	public List<UserDevice> findItems(Map parameters, String orderBy, boolean orderAsc)
 			throws Exception {
 
-		List<Receipt> receipts = null;
+		List<UserDevice> userDevices = null;
 
 		try {
 			Criteria crit = null;
-			crit = getSession().createCriteria(Receipt.class);
+			crit = getSession().createCriteria(UserDevice.class);
 
 			if (!parameters.isEmpty()) {
 				if (parameters.containsKey("status")) {
@@ -91,7 +91,11 @@ public class ReceiptDAO extends BaseHibernateDAO {
 				if (parameters.containsKey("idUser")) {
 					crit.add(Restrictions.eq("idUser",
 							(String) parameters.get("idUser")));
-				}		
+				}
+				if (parameters.containsKey("idRegistration")) {
+					crit.add(Restrictions.eq("idRegistration",
+							(String) parameters.get("idRegistration")));
+				}
 			}
 
 			// ordinamento
@@ -100,14 +104,14 @@ public class ReceiptDAO extends BaseHibernateDAO {
 			if ((orderBy != null) && (!orderAsc))
 				crit.addOrder(Order.desc(orderBy));
 
-			receipts = crit.list();
+			userDevices = crit.list();
 
-			log.debug("receipts:" + receipts);
+			log.debug("userDevices:" + userDevices);
 
 		} catch (Exception e) {
 			log.error("findItems failed", e);
 			throw new Exception(e);
 		}
-		return receipts;
+		return userDevices;
 	}
 }
