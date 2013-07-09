@@ -26,8 +26,7 @@ public class ExtractInformationCommand extends CommandConfig implements Command 
 	}
 	
 	public void execute() throws Exception {
-		//imageFile.doAction(replace(COMMAND,"$",imageFile.getFileName()));
 		ReceiptParserComponent rpc = new ReceiptParserComponent();		
-		rpc.parse(receipt, DIR_TMP+imageFile.getFileName()+".txt");		
+		rpc.parse(receipt, DIR_TMP+imageFile.getFileNameNoExtension()+".txt");		
 	}
 }

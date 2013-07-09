@@ -30,9 +30,23 @@ public class Receipt {
 	private String total;
 	private String date;
 	private String status;
+	private String tag;
+	private String uploadtime;
 	
 	private List<CandidateElement> totalCandidate = new ArrayList<CandidateElement>();
 	private List<CandidateElement> dateCandidate = new ArrayList<CandidateElement>();
+	
+	
+	
+	
+	public String getUploadtime() {
+		if (uploadtime==null)
+			uploadtime = "";
+		return uploadtime;
+	}
+	public void setUploadtime(String uploadtime) {
+		this.uploadtime = uploadtime;
+	}
 	
 	public String getName() {
 		if (name==null)
@@ -42,6 +56,16 @@ public class Receipt {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getTag() {
+		if (tag==null)
+			tag = "";
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
 	public String getTotal() {
 		if (total==null)
 			total = "";

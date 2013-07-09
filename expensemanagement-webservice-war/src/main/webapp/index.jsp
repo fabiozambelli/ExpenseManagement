@@ -4,18 +4,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Receipt Uploader</title>
+<title>Expense Management</title>
+<script>
+function doUpload() {
+	document.receiptUploader.submit();
+}
+</script>
 </head>
 <body>
-	<h1>Receipt Uploader</h1>
- 
-	<form action="/expensemanagement/rest/receipt/upload/fabio.zambelli" method="post" enctype="multipart/form-data"> 	   
-	   <p>
-		Select a receipt : <input type="file" name="file" size="45" />
-	   </p>
- 
-	   <input type="submit" value="Upload It" />
-	</form>
- 
+	<h1>OCR for Receipt - Demo </h1>
+	<p><a href="post.jsp">Post a receipt image</a></p>
+	<p><a href="get.jsp">Get results</a></p> 	
+	<h2>Usage</h2>
+	<ul>
+	<li>receipt image must be in portrait orientation</li>
+	<li>once the receipt is uploaded wait few minute to get response. the scheduler process is not still optimized ;-)</li>
+	</ul>
+	
 </body>
 </html>

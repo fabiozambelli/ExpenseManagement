@@ -92,6 +92,10 @@ public class ReceiptDAO extends BaseHibernateDAO {
 					crit.add(Restrictions.eq("idUser",
 							(String) parameters.get("idUser")));
 				}		
+				if (parameters.containsKey("tag")) {
+					crit.add(Restrictions.eq("tag",
+							(String) parameters.get("tag")));
+				}		
 			}
 
 			// ordinamento

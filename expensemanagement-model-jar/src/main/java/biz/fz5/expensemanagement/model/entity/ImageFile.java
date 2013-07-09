@@ -18,10 +18,14 @@ public class ImageFile {
 			.getName());
 	
 	private String fileName;
+	private String fileNameNoExtension;
 	
 	public ImageFile(String fileName) {
 		
 		this.fileName = fileName;
+		this.fileNameNoExtension = fileName.substring(0,fileName.lastIndexOf('.'));
+		log.debug("this.fileName:"+this.fileName);
+		log.debug("this.fileNameNoExtension:"+this.fileNameNoExtension);
 	}
 	
 	public void doAction(String commandString) throws Exception {
@@ -43,6 +47,15 @@ public class ImageFile {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+	public String getFileNameNoExtension() {
+		return fileNameNoExtension;
+	}
+
+	public void setFileNameNoExtension(String fileNameNoExtension) {
+		this.fileNameNoExtension = fileNameNoExtension;
+	}
+	
 	
 	
 }

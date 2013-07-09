@@ -21,6 +21,6 @@ public class TesseractPsm6Command extends CommandConfig implements Command {
 	}
 	
 	public void execute() throws Exception {
-		imageFile.doAction(replace(COMMAND,"$",imageFile.getFileName()));
+		imageFile.doAction(replace(COMMAND,"$",imageFile.getFileNameNoExtension()));
 	}
 }

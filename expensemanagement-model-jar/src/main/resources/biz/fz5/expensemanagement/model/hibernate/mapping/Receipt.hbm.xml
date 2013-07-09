@@ -9,8 +9,11 @@
         <property name="idUser" type="java.lang.String" lazy="true">
             <column name="id_utente" length="128" />
         </property>
-        <property name="imagePath" type="java.lang.String" lazy="true">
-            <column name="percorso_immagine" length="128" />
+        <property name="name" type="java.lang.String" lazy="true">
+            <column name="nome_scontrino" length="128" />
+        </property>
+        <property name="imageReceipt" type="java.sql.Blob" lazy="true">
+            <column name="immagine_scontrino"/>
         </property>
         <property name="total" type="java.lang.String" lazy="true">
             <column name="totale_scontrino" length="128" />
@@ -20,6 +23,9 @@
         </property>
         <property name="uploadDate" type="java.sql.Timestamp" lazy="true">
             <column name="data_pubblicazione"/>
+        </property>
+        <property name="tag" type="java.lang.String" lazy="true">
+            <column name="tag" length="128" />
         </property>
         <many-to-one name="status" column="id_stato" class="biz.fz5.expensemanagement.model.hibernate.pojo.ReceiptStatus" cascade="none" lazy="false"/>
     </class>
